@@ -37,7 +37,7 @@ def submit_request():
     # else:
     #     return Response("{'error': 'Failed to get data from server'}", status=response.status_code, mimetype='application/json')
 
-    return f'done! {ticket_id}'
+    return f'done! {ticket_id} {event_id}'
 
 
 
