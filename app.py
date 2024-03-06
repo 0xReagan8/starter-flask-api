@@ -24,7 +24,7 @@ def submit_request():
     scan_time = now.strftime(" %I:%M:%S %p | %Y-%m-%d")
     event_id = request.args.get('event_id')
     ticket_id = request.args.get('ticket_id')
-    ticket_data_file_path = f'{ticket_id}.pickle'
+    ticket_data_file_path = f'ticket_data.txt'
 
     if  os.path.exists(ticket_data_file_path):
         # Read back the pickled data
