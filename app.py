@@ -78,7 +78,7 @@ def submit_request():
     # uu
     # # Return the SVG data with the appropriate MIME type
     # return Response(svg_data, mimetype='image/svg+xml')
-    return str(os.listdir())
+    return str(os.listdir("."))
         
     
 if __name__ == '__main__':
