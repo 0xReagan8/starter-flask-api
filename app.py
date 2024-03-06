@@ -16,7 +16,49 @@ def hello_world():
 
 
     return 'Hello, world!'
-        
+    
+# Define the GET endpoint
+@app.route('/tickets/<int:ticket_id>/events/<int:event_id>', methods=['GET'])
+def get_ticket_info(ticket_id, event_id):
+
+    # now = datetime.now()
+    # scan_time = now.strftime(" %I:%M:%S %p | %Y-%m-%d")
+
+    # embed = {
+    #     "title": "🚀",
+    #     "description": f"Event ID: {event_id}\nTicket ID: {ticket_id}\nScan Time: {scan_time}\n\n{SERVVER_URL}",
+    #     "color": 1543684, 
+    #     "fields": [],
+    #     "footer": {
+    #         "text": "** use report URL to get a text listing of all activity"
+    #     }
+    # }
+
+    # # Wrap the embed in a payload as Discord expects
+    # payload = {
+    #     "embeds": [embed],
+    # }
+
+    # # Convert the payload to JSON and make the POST request to the webhook URL
+    # response = requests.post(WEBHOOK_URL, json=payload)
+
+    # # Check the response
+    # if response.status_code == 204:
+    #     print("Embed sent successfully!")
+    # else:
+    #     print(f"Failed to send embed. Status code: {response.status_code} - Response: {response.text}")
+
+    return 'Hello, world!2'
+
+    
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+# https://drab-gold-chimpanzee-shoe.cyclic.app//tickets/123/events/test
+
+
+
 
 # @app.route('/')
 # def hello_world():
@@ -81,42 +123,3 @@ def hello_world():
         
 #     # Return the SVG data with the appropriate MIME type
 #     return Response(svg_data, mimetype='image/svg+xml')
-
-    
-# Define the GET endpoint
-@app.route('/tickets/<int:ticket_id>/events/<int:event_id>', methods=['GET'])
-def get_ticket_info(ticket_id, event_id):
-
-    now = datetime.now()
-    scan_time = now.strftime(" %I:%M:%S %p | %Y-%m-%d")
-
-    embed = {
-        "title": "🚀",
-        "description": f"Event ID: {event_id}\nTicket ID: {ticket_id}\nScan Time: {scan_time}\n\n{SERVVER_URL}",
-        "color": 1543684, 
-        "fields": [],
-        "footer": {
-            "text": "** use report URL to get a text listing of all activity"
-        }
-    }
-
-    # Wrap the embed in a payload as Discord expects
-    payload = {
-        "embeds": [embed],
-    }
-
-    # Convert the payload to JSON and make the POST request to the webhook URL
-    response = requests.post(WEBHOOK_URL, json=payload)
-
-    # Check the response
-    if response.status_code == 204:
-        print("Embed sent successfully!")
-    else:
-        print(f"Failed to send embed. Status code: {response.status_code} - Response: {response.text}")
-
-    return 'Hello, world!'
-
-    
-if __name__ == '__main__':
-    app.run(debug=True)
-
