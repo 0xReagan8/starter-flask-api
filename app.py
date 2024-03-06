@@ -1,4 +1,4 @@
-from flask import Flask, Response
+from flask import Flask, Response,request
 import os
 from datetime import datetime
 import requests
@@ -40,6 +40,17 @@ def submit_request():
     return f'done! {ticket_id}'
 
 
+
+    
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+# https://drab-gold-chimpanzee-shoe.cyclic.app//tickets/123/events/test
+# https://drab-gold-chimpanzee-shoe.cyclic.app/submit?event_id=123&ticket_id=456
+
+
+
 # # Define the GET endpoint
 # @app.route('/tickets/<int:ticket_id>/events/<int:event_id>', methods=['GET'])
 # def get_ticket_info(ticket_id, event_id):
@@ -73,12 +84,6 @@ def submit_request():
 
 #     return 'Hello, world!2'
 
-    
-if __name__ == '__main__':
-    app.run(debug=True)
-
-
-https://drab-gold-chimpanzee-shoe.cyclic.app//tickets/123/events/test
 
 
 
