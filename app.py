@@ -3,7 +3,6 @@ import os
 from datetime import datetime
 import requests
 import json
-import pickle
 
 
 # Your Discord webhook URL
@@ -30,7 +29,7 @@ def submit_request():
     if  os.path.exists(ticket_data_file_path):
         # Read back the pickled data
         with open(ticket_data_file_path, 'rb') as f:
-            ticket_data = pickle.load(f)
+            ticket_data = f.read()
     else:
         ticket_data = {}
 
@@ -73,8 +72,8 @@ def submit_request():
         svg_data = svg_file.read()
 
     # Pickle the 'data' dictionary 
-    with open(ticket_data_file_path, 'wb') as f:
-        pickle.dump(ticket_data, f)
+    with open(ticket_data_file_path, 'w') as f:
+        f.write("test")
 
     # Return the SVG data with the appropriate MIME type
     return Response(svg_data, mimetype='image/svg+xml')
