@@ -19,6 +19,73 @@ def hello_world():
     return 'Hello, world!'
 
 
+
+def write_pickle_test(data:dict):
+    import io
+    import pickle
+    import json
+    from b2sdk.v1 import InMemoryAccountInfo, B2Api
+
+
+
+    pickled_data = pickle.dumps(data)
+
+    # Convert the dictionary to a JSON string
+    json_string = json.dumps(test)
+
+    # Encode the JSON string to a byte string using UTF-8 encoding
+    byte_string = json_string.encode('utf-8')
+
+    # Initialize the B2 API with your account information
+    info = InMemoryAccountInfo()
+    b2_api = B2Api(info)
+    application_key_id = os.getenv("KEY_ID")
+    application_key = os.getenv("APPLICATION_KEY")
+    b2_api.authorize_account("production", application_key_id, application_key)
+
+    # Specify your bucket
+    bucket = b2_api.get_bucket_by_name(os.getenv("BUCKET_NAME"))
+
+    file_name = 'example.pck'  # The name of the file in B2
+
+    # Upload the data
+    b2_file_version = bucket.upload_bytes(
+        data_bytes=pickled_data,
+        file_name=file_name
+    )
+    print(f"Data uploaded to file {file_name} with version {b2_file_version.id_}")
+
+def read_pickle_test():
+    import pickle
+    from b2sdk.v1 import InMemoryAccountInfo, B2Api, DownloadDestBytes
+
+    # Initialize the B2 API with your account information
+    info = InMemoryAccountInfo()
+    b2_api = B2Api(info)
+    application_key_id = os.getenv("KEY_ID")
+    application_key = os.getenv("APPLICATION_KEY")
+    b2_api.authorize_account("production", application_key_id, application_key)
+
+    # Specify your bucket
+    bucket = b2_api.get_bucket_by_name(os.getenv("BUCKET_NAME"))
+
+    # File to download
+    file_name = 'example.pck'  # The name of the file in B2
+
+    # Prepare a DownloadDestBytesIO object for the downloaded file
+    download_dest = DownloadDestBytes()
+
+    # Download the file into the DownloadDestBytesIO object
+    bucket.download_file_by_name(file_name, download_dest)
+
+    # Access the BytesIO object from download_dest
+    bytes_io = download_dest.get_bytes_written()
+
+    # decode the pickle
+    d = pickle.loads(bytes_io)
+
+    return(d)
+
 @app.route('/submit', methods=['GET'])
 def submit_request():
     now = datetime.now()
@@ -62,6 +129,9 @@ def submit_request():
     with open(svg_file_path, 'r') as svg_file:
         svg_data = svg_file.read()
 
+
+    data = read_pickle_test()
+    
     # # Return the SVG data with the appropriate MIME type
     # return Response(svg_data, mimetype='image/svg+xml')
     return KEY_NAME
