@@ -40,12 +40,12 @@ def submit_request():
     # return f'done! {ticket_id} {event_id}'
 
    # You might want to select an SVG file dynamically based on ticket_id and event_id
-    svg_file_path = './approved.svg'
+    svg_file_path = 'approved.svg'
     
     # Open the SVG file and read its contents
     with open(svg_file_path, 'r') as svg_file:
         svg_data = svg_file.read()
-        
+
     # Return the SVG data with the appropriate MIME type
     return Response(svg_data, mimetype='image/svg+xml')
 
