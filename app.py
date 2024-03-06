@@ -64,7 +64,7 @@ def submit_request():
 
     # # Return the SVG data with the appropriate MIME type
     # return Response(svg_data, mimetype='image/svg+xml')
-    return "test"
+    return KEY_NAME
         
     
 if __name__ == '__main__':
