@@ -14,48 +14,71 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
 
-
     return 'Hello, world!'
-    
-# Define the GET endpoint
-@app.route('/tickets/<int:ticket_id>/events/<int:event_id>', methods=['GET'])
-def get_ticket_info(ticket_id, event_id):
 
-    # now = datetime.now()
-    # scan_time = now.strftime(" %I:%M:%S %p | %Y-%m-%d")
 
-    # embed = {
-    #     "title": "🚀",
-    #     "description": f"Event ID: {event_id}\nTicket ID: {ticket_id}\nScan Time: {scan_time}\n\n{SERVVER_URL}",
-    #     "color": 1543684, 
-    #     "fields": [],
-    #     "footer": {
-    #         "text": "** use report URL to get a text listing of all activity"
-    #     }
-    # }
+@app.route('/submit', methods=['GET'])
+def submit_request():
+    event_id = request.args.get('event_id')
+    ticket_id = request.args.get('ticket_id')
 
-    # # Wrap the embed in a payload as Discord expects
-    # payload = {
-    #     "embeds": [embed],
-    # }
+    if not event_id or not ticket_id:
+        return Response("{'error': 'Missing event_id or ticket_id'}", status=400, mimetype='application/json')
 
-    # # Convert the payload to JSON and make the POST request to the webhook URL
-    # response = requests.post(WEBHOOK_URL, json=payload)
+    # # Construct the URL with the event_id and ticket_id
+    # target_url = f"{SERVER_URL}/some-endpoint?event_id={event_id}&ticket_id={ticket_id}"
 
-    # # Check the response
-    # if response.status_code == 204:
-    #     print("Embed sent successfully!")
+    # # Make a GET request to the server
+    # response = requests.get(target_url)
+
+    # if response.status_code == 200:
+    #     # You can process the response here if needed
+    #     return Response(response.content, status=200, mimetype='application/json')
     # else:
-    #     print(f"Failed to send embed. Status code: {response.status_code} - Response: {response.text}")
+    #     return Response("{'error': 'Failed to get data from server'}", status=response.status_code, mimetype='application/json')
 
-    return 'Hello, world!2'
+    return f'done! {ticket_id}'
+
+
+# # Define the GET endpoint
+# @app.route('/tickets/<int:ticket_id>/events/<int:event_id>', methods=['GET'])
+# def get_ticket_info(ticket_id, event_id):
+
+#     # now = datetime.now()
+#     # scan_time = now.strftime(" %I:%M:%S %p | %Y-%m-%d")
+
+#     # embed = {
+#     #     "title": "🚀",
+#     #     "description": f"Event ID: {event_id}\nTicket ID: {ticket_id}\nScan Time: {scan_time}\n\n{SERVVER_URL}",
+#     #     "color": 1543684, 
+#     #     "fields": [],
+#     #     "footer": {
+#     #         "text": "** use report URL to get a text listing of all activity"
+#     #     }
+#     # }
+
+#     # # Wrap the embed in a payload as Discord expects
+#     # payload = {
+#     #     "embeds": [embed],
+#     # }
+
+#     # # Convert the payload to JSON and make the POST request to the webhook URL
+#     # response = requests.post(WEBHOOK_URL, json=payload)
+
+#     # # Check the response
+#     # if response.status_code == 204:
+#     #     print("Embed sent successfully!")
+#     # else:
+#     #     print(f"Failed to send embed. Status code: {response.status_code} - Response: {response.text}")
+
+#     return 'Hello, world!2'
 
     
 if __name__ == '__main__':
     app.run(debug=True)
 
 
-# https://drab-gold-chimpanzee-shoe.cyclic.app//tickets/123/events/test
+https://drab-gold-chimpanzee-shoe.cyclic.app//tickets/123/events/test
 
 
 
