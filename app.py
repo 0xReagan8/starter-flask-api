@@ -71,13 +71,15 @@ def submit_request():
     with open(svg_file_path, 'r') as svg_file:
         svg_data = svg_file.read()
 
+    
     # Pickle the 'data' dictionary 
     with open(ticket_data_file_path, 'w') as f:
         f.write("test")
-
-    # Return the SVG data with the appropriate MIME type
-    return Response(svg_data, mimetype='image/svg+xml')
-
+    # uu
+    # # Return the SVG data with the appropriate MIME type
+    # return Response(svg_data, mimetype='image/svg+xml')
+    return str(os.listdir())
+        
     
 if __name__ == '__main__':
     app.run(debug=True)
