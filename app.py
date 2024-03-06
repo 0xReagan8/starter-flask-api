@@ -25,21 +25,11 @@ def submit_request():
     scan_time = now.strftime(" %I:%M:%S %p | %Y-%m-%d")
     event_id = request.args.get('event_id')
     ticket_id = request.args.get('ticket_id')
-    ticket_data_file_path = f'ticket_data.txt'
-
-    if  os.path.exists(ticket_data_file_path):
-        # Read back the pickled data
-        with open(ticket_data_file_path, 'rb') as f:
-            ticket_data = f.read()
-    else:
-        ticket_data = {}
-
+    
 
     if not event_id or not ticket_id:
             return Response("{'error': 'Missing event_id or ticket_id'}", status=400, mimetype='application/json')
 
-    # update with this request data
-    ticket_data[ticket_id] = {"event_id":event_id, "timestamp":scan_time}
 
     embed = {
         "title": "🚀",
