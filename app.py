@@ -3,12 +3,9 @@ import os
 from datetime import datetime
 import requests
 import json
-from dotenv import load_dotenv
 
-load_dotenv(".env")
-# Configuration and environment setup
+
 KEY_NAME = os.getenv("KEY_NAME")
-
 
 # Your Discord webhook URL
 WEBHOOK_URL = "https://discord.com/api/webhooks/1214662183452016660/1yOSpSVg3oj0gr6rQWnpKW9ncjt-TKeODdlzXE12hWSLwmNlUNOEUI21L3hmxPYCvK5u"
