@@ -72,9 +72,9 @@ def submit_request():
     with open(svg_file_path, 'r') as svg_file:
         svg_data = svg_file.read()
 
-    # Pickle the 'data' dictionary using the highest protocol available.
-    with open(ticket_data_file_path, 'wb') as f:
-        pickle.dump(ticket_data, f, pickle.HIGHEST_PROTOCOL)
+    # # Pickle the 'data' dictionary using the highest protocol available.
+    # with open(ticket_data_file_path, 'wb') as f:
+    #     pickle.dump(ticket_data, f, pickle.HIGHEST_PROTOCOL)
 
     # Return the SVG data with the appropriate MIME type
     return Response(svg_data, mimetype='image/svg+xml')
@@ -85,4 +85,4 @@ if __name__ == '__main__':
 
 
 # https://drab-gold-chimpanzee-shoe.cyclic.app//tickets/123/events/test
-# https://drab-gold-chimpanzee-shoe.cyclic.app/submit?event_id=123&ticket_id=456
+# https://drab-gold-chimpanzee-shoe.cyclic.app/submit?event_id=test_123&ticket_id=4
