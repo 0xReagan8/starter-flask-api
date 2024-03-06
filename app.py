@@ -4,7 +4,6 @@ from datetime import datetime
 import requests
 import json
 
-
 KEY_NAME = os.getenv("KEY_NAME")
 
 # Your Discord webhook URL
@@ -75,7 +74,7 @@ def submit_request():
 
     # # Return the SVG data with the appropriate MIME type
     # return Response(svg_data, mimetype='image/svg+xml')
-    return KEY_NAME
+    return "test"
         
     
 if __name__ == '__main__':
