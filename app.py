@@ -40,7 +40,7 @@ def hello_world():
     #     print(f"Failed to send embed. Status code: {response.status_code} - Response: {response.text}")
 
    # You might want to select an SVG file dynamically based on ticket_id and event_id
-    svg_file_path = os.path.join(app.root_path, 'approved.svg')
+    svg_file_path = './approved.svg'
     
     # Open the SVG file and read its contents
     with open(svg_file_path, 'r') as svg_file:
@@ -88,3 +88,13 @@ def get_ticket_info(ticket_id, event_id):
     
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+https://drab-gold-chimpanzee-shoe.cyclic.app/tickets/123/events/test_event/
+
+
+
+
+
+
