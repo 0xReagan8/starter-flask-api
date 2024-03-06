@@ -15,3 +15,5 @@ Flask
 gspread
 oauth2client
 discord
+b2sdk
+python-dotenv

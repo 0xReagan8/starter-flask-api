@@ -3,6 +3,11 @@ import os
 from datetime import datetime
 import requests
 import json
+from dotenv import load_dotenv
+
+load_dotenv(".env")
+# Configuration and environment setup
+KEY_NAME = os.getenv("KEY_NAME")
 
 
 # Your Discord webhook URL
@@ -71,14 +76,9 @@ def submit_request():
     with open(svg_file_path, 'r') as svg_file:
         svg_data = svg_file.read()
 
-    
-    # Pickle the 'data' dictionary 
-    with open(ticket_data_file_path, 'w') as f:
-        f.write("test")
-    # uu
     # # Return the SVG data with the appropriate MIME type
     # return Response(svg_data, mimetype='image/svg+xml')
-    return str(os.listdir("."))
+    return KEY_NAME
         
     
 if __name__ == '__main__':
@@ -87,3 +87,8 @@ if __name__ == '__main__':
 
 # https://drab-gold-chimpanzee-shoe.cyclic.app//tickets/123/events/test
 # https://drab-gold-chimpanzee-shoe.cyclic.app/submit?event_id=test_123&ticket_id=4
+# https://secure.backblaze.com/b2_buckets.htm
+    
+
+
+
