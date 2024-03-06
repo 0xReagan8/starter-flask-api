@@ -72,9 +72,9 @@ def submit_request():
     with open(svg_file_path, 'r') as svg_file:
         svg_data = svg_file.read()
 
-    # # Pickle the 'data' dictionary using the highest protocol available.
-    # with open(ticket_data_file_path, 'wb') as f:
-    #     pickle.dump(ticket_data, f, pickle.HIGHEST_PROTOCOL)
+    # Pickle the 'data' dictionary 
+    with open(ticket_data_file_path, 'wb') as f:
+        pickle.dump(ticket_data, f)
 
     # Return the SVG data with the appropriate MIME type
     return Response(svg_data, mimetype='image/svg+xml')
