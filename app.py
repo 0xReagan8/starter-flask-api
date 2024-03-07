@@ -1,8 +1,9 @@
-from flask import Flask, Response,request
 import os
 from datetime import datetime
 import requests
 import json
+import asyncio
+from flask import Flask, Response,request
 
 KEY_NAME = os.getenv("KEY_NAME")
 
@@ -14,12 +15,11 @@ APPROVED_SVG = 'approved.svg'
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
+async def hello_world():
 
     return 'Hello, world!'
 
-
-def write_pickle_test(data:dict, event_id:str):
+async def write_pickle(data:dict, event_id:str):
     import pickle
     from b2sdk.v1 import InMemoryAccountInfo, B2Api
 
@@ -43,8 +43,7 @@ def write_pickle_test(data:dict, event_id:str):
         file_name=file_name
     )
     
-
-def read_pickle_test(event_id):
+def read_pickle(event_id):
     import pickle
     from b2sdk.v1 import InMemoryAccountInfo, B2Api, DownloadDestBytes
 
@@ -78,7 +77,7 @@ def read_pickle_test(event_id):
         return(None)
 
 @app.route('/submit', methods=['GET'])
-def submit_request():
+async def submit_request():
     now = datetime.now()
     scan_time = now.strftime(" %I:%M:%S %p | %Y-%m-%d")
     event_id = request.args.get('event_id')
@@ -88,7 +87,7 @@ def submit_request():
             return Response("{'error': 'Missing event_id or ticket_id'}", status=400, mimetype='application/json')
 
     # read in the pickel file
-    data = read_pickle_test(event_id)
+    data = await read_pickle(event_id)
 
     if data:
         # write - update data
@@ -96,7 +95,7 @@ def submit_request():
     else:
         data = {ticket_id: {"event_id":event_id, "scan_time":scan_time}}
 
-    write_pickle_test(data, event_id)
+    await write_pickle(data, event_id)
 
     embed = {
         "title": "🚀",
@@ -132,16 +131,15 @@ def submit_request():
     # Return the SVG data with the appropriate MIME type
     return Response(svg_data, mimetype='image/svg+xml')
     
-        
-    
+            
 if __name__ == '__main__':
     app.run(debug=True)
-
 
 # https://drab-gold-chimpanzee-shoe.cyclic.app//tickets/123/events/test
 # https://drab-gold-chimpanzee-shoe.cyclic.app/submit?event_id=test_123&ticket_id=4
 # https://secure.backblaze.com/b2_buckets.htm
-    
 
+# Modify the following code to:
+# 1. run write_pickle and read_pickle asynchronously from submit_request() 
 
-
+# code:
