@@ -130,11 +130,13 @@ def submit_request():
         svg_data = svg_file.read()
 
     data = read_pickle_test()
-    
-    # # Return the SVG data with the appropriate MIME type
-    # return Response(svg_data, mimetype='image/svg+xml')
-    # return KEY_NAME
-    return str(data)
+    if data:
+        # # Return the SVG data with the appropriate MIME type
+        # return Response(svg_data, mimetype='image/svg+xml')
+        # return KEY_NAME
+        return str(data)
+    else:
+        return 'No file found  ..'
         
     
 if __name__ == '__main__':
