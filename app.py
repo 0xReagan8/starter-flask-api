@@ -92,11 +92,17 @@ def submit_request():
     scan_time = now.strftime(" %I:%M:%S %p | %Y-%m-%d")
     event_id = request.args.get('event_id')
     ticket_id = request.args.get('ticket_id')
-    
-
+        
     if not event_id or not ticket_id:
             return Response("{'error': 'Missing event_id or ticket_id'}", status=400, mimetype='application/json')
 
+    # read in the pickel file
+    data = read_pickle_test(event_id)
+
+    if data:
+        # write - update data
+        data[ticket_id] = {"event_id":event_id, "scan_time":scan_time}
+        write_pickle_test(data, event_id)
 
     embed = {
         "title": "🚀",
@@ -129,14 +135,9 @@ def submit_request():
     with open(svg_file_path, 'r') as svg_file:
         svg_data = svg_file.read()
 
-    data = read_pickle_test(event_id)
-    if data:
-        # # Return the SVG data with the appropriate MIME type
-        # return Response(svg_data, mimetype='image/svg+xml')
-        # return KEY_NAME
-        return str(data)
-    else:
-        return 'No file found  ..'
+    # Return the SVG data with the appropriate MIME type
+    return Response(svg_data, mimetype='image/svg+xml')
+    
         
     
 if __name__ == '__main__':
