@@ -129,7 +129,7 @@ def submit_request():
     with open(svg_file_path, 'r') as svg_file:
         svg_data = svg_file.read()
 
-    data = read_pickle_test()
+    data = read_pickle_test(event_id)
     if data:
         # # Return the SVG data with the appropriate MIME type
         # return Response(svg_data, mimetype='image/svg+xml')
