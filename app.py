@@ -20,13 +20,11 @@ def hello_world():
 
 
 
-def write_pickle_test(data:dict):
+def write_pickle_test(data:dict, event_id:str):
     import io
     import pickle
     import json
     from b2sdk.v1 import InMemoryAccountInfo, B2Api
-
-
 
     pickled_data = pickle.dumps(data)
 
@@ -46,7 +44,7 @@ def write_pickle_test(data:dict):
     # Specify your bucket
     bucket = b2_api.get_bucket_by_name(os.getenv("BUCKET_NAME"))
 
-    file_name = 'example.pck'  # The name of the file in B2
+    file_name = f'{event_id}.pck'  # The name of the file in B2
 
     # Upload the data
     b2_file_version = bucket.upload_bytes(
@@ -55,7 +53,7 @@ def write_pickle_test(data:dict):
     )
     print(f"Data uploaded to file {file_name} with version {b2_file_version.id_}")
 
-def read_pickle_test():
+def read_pickle_test(event_id):
     import pickle
     from b2sdk.v1 import InMemoryAccountInfo, B2Api, DownloadDestBytes
 
@@ -68,23 +66,25 @@ def read_pickle_test():
 
     # Specify your bucket
     bucket = b2_api.get_bucket_by_name(os.getenv("BUCKET_NAME"))
+    try:
+        # File to download
+        file_name = f'{event_id}.pck'  # The name of the file in B2
 
-    # File to download
-    file_name = 'example.pck'  # The name of the file in B2
+        # Prepare a DownloadDestBytesIO object for the downloaded file
+        download_dest = DownloadDestBytes()
 
-    # Prepare a DownloadDestBytesIO object for the downloaded file
-    download_dest = DownloadDestBytes()
+        # Download the file into the DownloadDestBytesIO object
+        bucket.download_file_by_name(file_name, download_dest)
 
-    # Download the file into the DownloadDestBytesIO object
-    bucket.download_file_by_name(file_name, download_dest)
+        # Access the BytesIO object from download_dest
+        bytes_io = download_dest.get_bytes_written()
 
-    # Access the BytesIO object from download_dest
-    bytes_io = download_dest.get_bytes_written()
+        # decode the pickle
+        d = pickle.loads(bytes_io)
 
-    # decode the pickle
-    d = pickle.loads(bytes_io)
-
-    return(d)
+        return(d)
+    except:
+        return(None)
 
 @app.route('/submit', methods=['GET'])
 def submit_request():
@@ -129,9 +129,8 @@ def submit_request():
     with open(svg_file_path, 'r') as svg_file:
         svg_data = svg_file.read()
 
-
     data = read_pickle_test()
-
+    
     # # Return the SVG data with the appropriate MIME type
     # return Response(svg_data, mimetype='image/svg+xml')
     # return KEY_NAME
