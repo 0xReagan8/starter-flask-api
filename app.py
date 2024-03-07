@@ -1,8 +1,8 @@
 import os
 from datetime import datetime
 import requests
-import json
-from flask import Flask, Response,request
+# import json
+from flask import Flask, Response, request, render_template_string
 
 KEY_NAME = os.getenv("KEY_NAME")
 
@@ -17,6 +17,27 @@ app = Flask(__name__)
 def hello_world():
 
     return 'Hello, world!'
+
+@app.route('/working')
+def working_page():
+    # This HTML will be displayed to the user before submit_request() starts
+    html_content = '''
+    <html>
+        <head>
+            <title>Processing...</title>
+            <meta http-equiv="refresh" content="5;url=/submit?event_id={{ event_id }}&ticket_id={{ ticket_id }}" />
+        </head>
+        <body>
+            <h1>Working...</h1>
+            <p>Please wait while we process your request.</p>
+        </body>
+    </html>
+    '''
+    event_id = request.args.get('event_id')
+    ticket_id = request.args.get('ticket_id')
+    if not event_id or not ticket_id:
+        return Response("{'error': 'Missing event_id or ticket_id'}", status=400, mimetype='application/json')
+    return render_template_string(html_content, event_id=event_id, ticket_id=ticket_id)
 
 def write_pickle(data:dict, event_id:str):
     import pickle
@@ -137,8 +158,3 @@ if __name__ == '__main__':
 # https://drab-gold-chimpanzee-shoe.cyclic.app//tickets/123/events/test
 # https://drab-gold-chimpanzee-shoe.cyclic.app/submit?event_id=test_123&ticket_id=4
 # https://secure.backblaze.com/b2_buckets.htm
-
-# Modify the following code to:
-# 1. run write_pickle and read_pickle asynchronously from submit_request() 
-
-# code:
