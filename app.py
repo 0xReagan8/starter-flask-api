@@ -18,10 +18,50 @@ def hello_world():
 
     return 'Hello, world!'
 
+# @app.route('/working')
+# def working_page():
+#     # This HTML will be displayed to the user before submit_request() starts
+#     html_content = '''
+#     <html>
+#         <head>
+#             <title>Processing...</title>
+#             <meta http-equiv="refresh" content="5;url=/submit?event_id={{ event_id }}&ticket_id={{ ticket_id }}" />
+#         </head>
+#         <body>
+#             <h1>Working...</h1>
+#             <p>Please wait while we process your request.</p>
+#         </body>
+#     </html>
+#     '''
+#     event_id = request.args.get('event_id')
+#     ticket_id = request.args.get('ticket_id')
+#     if not event_id or not ticket_id:
+#         return Response("{'error': 'Missing event_id or ticket_id'}", status=400, mimetype='application/json')
+#     return render_template_string(html_content, event_id=event_id, ticket_id=ticket_id)
+
 @app.route('/working')
 def working_page():
-    # This HTML will be displayed to the user before submit_request() starts
-    html_content = '''
+    event_id = request.args.get('event_id')
+    ticket_id = request.args.get('ticket_id')
+
+    # Check if both event_id and ticket_id are provided
+    if not event_id or not ticket_id:
+        # HTML content to display if parameters are missing
+        error_html_content = '''
+        <html>
+            <head>
+                <title>Error</title>
+            </head>
+            <body>
+                <h1>Error</h1>
+                <p>Missing event_id or ticket_id. Please provide both parameters in the URL.</p>
+            </body>
+        </html>
+        '''
+        return error_html_content
+
+    # HTML content to display while working
+    working_html_content = '''
     <html>
         <head>
             <title>Processing...</title>
@@ -33,11 +73,11 @@ def working_page():
         </body>
     </html>
     '''
-    event_id = request.args.get('event_id')
-    ticket_id = request.args.get('ticket_id')
-    if not event_id or not ticket_id:
-        return Response("{'error': 'Missing event_id or ticket_id'}", status=400, mimetype='application/json')
-    return render_template_string(html_content, event_id=event_id, ticket_id=ticket_id)
+
+    return render_template_string(working_html_content, event_id=event_id, ticket_id=ticket_id)
+
+
+
 
 def write_pickle(data:dict, event_id:str):
     import pickle
