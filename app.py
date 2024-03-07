@@ -28,12 +28,6 @@ def write_pickle_test(data:dict, event_id:str):
 
     pickled_data = pickle.dumps(data)
 
-    # Convert the dictionary to a JSON string
-    json_string = json.dumps(test)
-
-    # Encode the JSON string to a byte string using UTF-8 encoding
-    byte_string = json_string.encode('utf-8')
-
     # Initialize the B2 API with your account information
     info = InMemoryAccountInfo()
     b2_api = B2Api(info)
@@ -51,7 +45,7 @@ def write_pickle_test(data:dict, event_id:str):
         data_bytes=pickled_data,
         file_name=file_name
     )
-    print(f"Data uploaded to file {file_name} with version {b2_file_version.id_}")
+    
 
 def read_pickle_test(event_id):
     import pickle
@@ -102,7 +96,10 @@ def submit_request():
     if data:
         # write - update data
         data[ticket_id] = {"event_id":event_id, "scan_time":scan_time}
-        write_pickle_test(data, event_id)
+    else:
+        data = {ticket_id: {"event_id":event_id, "scan_time":scan_time}}
+        
+    write_pickle_test(data, event_id)
 
     embed = {
         "title": "🚀",
