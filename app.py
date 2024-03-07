@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 import requests
 # import json
-from flask import Flask, Response, request, render_template_string
+from flask import Flask, Response, request, render_template, render_template_string
 
 KEY_NAME = os.getenv("KEY_NAME")
 
@@ -44,39 +44,42 @@ def working_page():
     event_id = request.args.get('event_id')
     ticket_id = request.args.get('ticket_id')
 
-    # Check if both event_id and ticket_id are provided
+    # # Check if both event_id and ticket_id are provided
+    # if not event_id or not ticket_id:
+    #     # HTML content to display if parameters are missing
+    #     error_html_content = '''
+    #     <html>
+    #         <head>
+    #             <title>Error</title>
+    #         </head>
+    #         <body>
+    #             <h1>Error</h1>
+    #             <p>Missing event_id or ticket_id. Please provide both parameters in the URL.</p>
+    #         </body>
+    #     </html>
+    #     '''
+    #     return error_html_content
+
+    # # HTML content to display while working
+    # working_html_content = '''
+    # <html>
+    #     <head>
+    #         <title>Processing...</title>
+    #         <meta http-equiv="refresh" content="5;url=/submit?event_id={{ event_id }}&ticket_id={{ ticket_id }}" />
+    #     </head>
+    #     <body>
+    #         <h1>Working...</h1>
+    #         <p>Please wait while we process your request.</p>
+    #     </body>
+    # </html>
+    # '''
+
     if not event_id or not ticket_id:
-        # HTML content to display if parameters are missing
-        error_html_content = '''
-        <html>
-            <head>
-                <title>Error</title>
-            </head>
-            <body>
-                <h1>Error</h1>
-                <p>Missing event_id or ticket_id. Please provide both parameters in the URL.</p>
-            </body>
-        </html>
-        '''
-        return error_html_content
+        # Render the error.html template if parameters are missing
+        return render_template('home.html')
 
-    # HTML content to display while working
-    working_html_content = '''
-    <html>
-        <head>
-            <title>Processing...</title>
-            <meta http-equiv="refresh" content="5;url=/submit?event_id={{ event_id }}&ticket_id={{ ticket_id }}" />
-        </head>
-        <body>
-            <h1>Working...</h1>
-            <p>Please wait while we process your request.</p>
-        </body>
-    </html>
-    '''
-
-    return render_template_string(working_html_content, event_id=event_id, ticket_id=ticket_id)
-
-
+    # Render the working.html template while working, passing event_id and ticket_id
+    return render_template('loading.html', event_id=event_id, ticket_id=ticket_id)
 
 
 def write_pickle(data:dict, event_id:str):
