@@ -21,9 +21,7 @@ def hello_world():
 
 
 def write_pickle_test(data:dict, event_id:str):
-    import io
     import pickle
-    import json
     from b2sdk.v1 import InMemoryAccountInfo, B2Api
 
     pickled_data = pickle.dumps(data)
@@ -38,7 +36,7 @@ def write_pickle_test(data:dict, event_id:str):
     # Specify your bucket
     bucket = b2_api.get_bucket_by_name(os.getenv("BUCKET_NAME"))
 
-    file_name = f'{event_id}.pck'  # The name of the file in B2
+    file_name = f"{event_id}.pck"  # The name of the file in B2
 
     # Upload the data
     b2_file_version = bucket.upload_bytes(
@@ -62,7 +60,7 @@ def read_pickle_test(event_id):
     bucket = b2_api.get_bucket_by_name(os.getenv("BUCKET_NAME"))
     try:
         # File to download
-        file_name = f'{event_id}.pck'  # The name of the file in B2
+        file_name = f"{event_id}.pck"  # The name of the file in B2
 
         # Prepare a DownloadDestBytesIO object for the downloaded file
         download_dest = DownloadDestBytes()
@@ -98,7 +96,7 @@ def submit_request():
         data[ticket_id] = {"event_id":event_id, "scan_time":scan_time}
     else:
         data = {ticket_id: {"event_id":event_id, "scan_time":scan_time}}
-        
+
     write_pickle_test(data, event_id)
 
     embed = {
