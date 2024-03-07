@@ -2,7 +2,6 @@ import os
 from datetime import datetime
 import requests
 import json
-import asyncio
 from flask import Flask, Response,request
 
 KEY_NAME = os.getenv("KEY_NAME")
@@ -15,11 +14,11 @@ APPROVED_SVG = 'approved.svg'
 app = Flask(__name__)
 
 @app.route('/')
-async def hello_world():
+def hello_world():
 
     return 'Hello, world!'
 
-async def write_pickle(data:dict, event_id:str):
+def write_pickle(data:dict, event_id:str):
     import pickle
     from b2sdk.v1 import InMemoryAccountInfo, B2Api
 
@@ -77,7 +76,7 @@ def read_pickle(event_id):
         return(None)
 
 @app.route('/submit', methods=['GET'])
-async def submit_request():
+def submit_request():
     now = datetime.now()
     scan_time = now.strftime(" %I:%M:%S %p | %Y-%m-%d")
     event_id = request.args.get('event_id')
@@ -87,7 +86,7 @@ async def submit_request():
             return Response("{'error': 'Missing event_id or ticket_id'}", status=400, mimetype='application/json')
 
     # read in the pickel file
-    data = await read_pickle(event_id)
+    data = read_pickle(event_id)
 
     if data:
         # write - update data
@@ -95,7 +94,7 @@ async def submit_request():
     else:
         data = {ticket_id: {"event_id":event_id, "scan_time":scan_time}}
 
-    await write_pickle(data, event_id)
+    write_pickle(data, event_id)
 
     embed = {
         "title": "🚀",
