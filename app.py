@@ -131,10 +131,11 @@ def submit_request():
 
 
     data = read_pickle_test()
-    
+
     # # Return the SVG data with the appropriate MIME type
     # return Response(svg_data, mimetype='image/svg+xml')
-    return KEY_NAME
+    # return KEY_NAME
+    return str(data)
         
     
 if __name__ == '__main__':
