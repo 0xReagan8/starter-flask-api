@@ -1,31 +1,27 @@
-# Flask API Starter
+# Tickets
 
-This is the simplest possible python api using flask that responds with: 
-```
-Hello, world!
-```
-
-## Deploy to Cyclic in seconds 
-
-[![Deploy to Cyclic](https://deploy.cyclic.app/button.svg)](https://deploy.cyclic.app/)
+## endpoints
 
 
-## Run Locally
+### /submit
+*description:* 
 
-Prerequisites:
-- pyenv
-- python 3.10.11
+- Sent from the QR code - contains the event and ticket information
 
-Install: `bin/install`
-- creates virtual env
-- installs dependencies from `requirements.txt`
+*example:* 
 
-Run: `bin/start`
-- runs a `gunicorn` server
+    https://YOUR_URL.com/submit?event_id=test_123&ticket_id=5
 
+<hr/>
 
-## Questions / Help
+### /list
 
-Join us on Discord: [https://discord.cyclic.sh](https://discord.cyclic.sh)
+*description:*
 
-Enjoy!
+- Gets the event record form the server
+
+*example:* 
+
+    https://YOUR_URL.com/list?event_id=test_123
+
+<hr/>

@@ -19,7 +19,6 @@ def hello_world():
     return 'Hello, world!'
 
 
-
 def write_pickle_test(data:dict, event_id:str):
     import pickle
     from b2sdk.v1 import InMemoryAccountInfo, B2Api
