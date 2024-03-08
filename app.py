@@ -185,7 +185,7 @@ def list_events_page():
 
 
 @app.route('/list_event', methods=['GET'])
-def list_events_page():
+def list_event_page():
     event_id = request.args.get('event_id')
 
     # read in the pickel file
