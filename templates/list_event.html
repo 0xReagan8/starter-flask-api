@@ -57,27 +57,32 @@
         <img id="logo" src="/static/assets/logo_autonomous.svg" alt="Autonomous Logo">
       </div>
 
-    <table>
+      <table>
         <thead>
             <tr>
-                <th>Event</th>
-                <th>Verified Timestamp</th>
+                <th>Key</th>
+                <th>Event ID</th>
+                <th>Scan Time</th>
             </tr>
         </thead>
         <tbody>
-            {% for event in data %}
+            {% for key, event in data.items() %}
             <tr>
+                <td>{{ key }}</td>
                 <td>{{ event.event_id }}</td>
-                <td>{{ event.scan_times }}</td>
+                <td>{{ event.scan_time }}</td>
             </tr>
             {% endfor %}
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="2">Percent Complete: {{ percent_complete }}%</td>
+                <td colspan="3">Percent Complete: {{ percent_complete }}%</td>
             </tr>
         </tfoot>
-    </table>
+      </table>
 
 </body>
 </html>
+
+
+
