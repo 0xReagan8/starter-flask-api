@@ -135,7 +135,7 @@ def submit_request():
         print(f"Failed to send embed. Status code: {response.status_code} - Response: {response.text}")
 
 
-    return render_template('verified.html', event_id=event_id, ticket_id=ticket_id, percent_complete=percent_complete)
+    return render_template('verified.html', event_id=event_id, ticket_id=ticket_id, scan_time=scan_time, percent_complete=percent_complete)
 
     
             
