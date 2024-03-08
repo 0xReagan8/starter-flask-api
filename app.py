@@ -176,13 +176,13 @@ def submit_request():
     return render_template('verified.html', event_id=event_id, ticket_id=ticket_id, scan_time=scan_time, percent_complete=percent_complete)
 
 
-@app.route('/list_events', methods=['GET'])
-def list_events_page():
+# @app.route('/list_events', methods=['GET'])
+# def list_events_page():
     
-    # read in the pickel file
-    data = list_bucket()
+#     # read in the pickel file
+#     data = list_bucket()
     
-    return render_template('list_events.html', data=data)
+#     return render_template('list_events.html', data=data)
 
             
 if __name__ == '__main__':
@@ -193,4 +193,7 @@ if __name__ == '__main__':
 # https://secure.backblaze.com/b2_buckets.htm
     
 # https://drab-gold-chimpanzee-shoe.cyclic.app/validate_ticket?event_id=test_123&ticket_id=21
+    
+# https://drab-gold-chimpanzee-shoe.cyclic.app/list_events
+    
 
