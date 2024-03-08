@@ -210,5 +210,5 @@ if __name__ == '__main__':
 # https://drab-gold-chimpanzee-shoe.cyclic.app/list_events
 # https://drab-gold-chimpanzee-shoe.cyclic.app/list_event?event_id=test
     
-https://drab-gold-chimpanzee-shoe.cyclic.app/validate_ticket?event_id=test_123&ticket_id=23
+# https://drab-gold-chimpanzee-shoe.cyclic.app/validate_ticket?event_id=test_123&ticket_id=23
 
