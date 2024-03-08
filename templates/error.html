@@ -14,15 +14,21 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh; /* Ensure the background covers the entire viewport */
+    min-height: 100vh; /* Ensure the background covers the entire viewport */
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column; /* Stack children vertically */
+    align-items: center;
   }
   #logo {
-    max-width: 100%;
-    height: auto;
+    width: 100%; /* Full width */
+    height: auto; /* Maintain aspect ratio */
+  }
+  .center-content {
+    flex-grow: 1; /* Take up remaining space */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center;
+    align-items: center;
   }
   .error-message {
     font-size: 48px; /* Large size for "ERROR" */
@@ -40,7 +46,9 @@
     <div>
         <img id="logo" src="/static/assets/logo_autonomous.svg" alt="Autonomous Logo">
     </div>
-    <div class="error-message">ERROR</div>
-    <div class="error-code">error code:</div>
+    <div class="center-content">
+        <div class="error-message">ERROR</div>
+        <div class="error-code">error code:</div>
+    </div>
 </body>
 </html>
