@@ -14,30 +14,8 @@ APPROVED_SVG = 'approved.svg'
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
-
-    return 'Hello, world!'
-
-# @app.route('/working')
-# def working_page():
-#     # This HTML will be displayed to the user before submit_request() starts
-#     html_content = '''
-#     <html>
-#         <head>
-#             <title>Processing...</title>
-#             <meta http-equiv="refresh" content="5;url=/submit?event_id={{ event_id }}&ticket_id={{ ticket_id }}" />
-#         </head>
-#         <body>
-#             <h1>Working...</h1>
-#             <p>Please wait while we process your request.</p>
-#         </body>
-#     </html>
-#     '''
-#     event_id = request.args.get('event_id')
-#     ticket_id = request.args.get('ticket_id')
-#     if not event_id or not ticket_id:
-#         return Response("{'error': 'Missing event_id or ticket_id'}", status=400, mimetype='application/json')
-#     return render_template_string(html_content, event_id=event_id, ticket_id=ticket_id)
+def home():
+    return render_template('home.html')
 
 @app.route('/validate_ticket')
 def working_page():
