@@ -39,40 +39,10 @@ def hello_world():
 #         return Response("{'error': 'Missing event_id or ticket_id'}", status=400, mimetype='application/json')
 #     return render_template_string(html_content, event_id=event_id, ticket_id=ticket_id)
 
-@app.route('/working')
+@app.route('/validate_ticket')
 def working_page():
     event_id = request.args.get('event_id')
     ticket_id = request.args.get('ticket_id')
-
-    # # Check if both event_id and ticket_id are provided
-    # if not event_id or not ticket_id:
-    #     # HTML content to display if parameters are missing
-    #     error_html_content = '''
-    #     <html>
-    #         <head>
-    #             <title>Error</title>
-    #         </head>
-    #         <body>
-    #             <h1>Error</h1>
-    #             <p>Missing event_id or ticket_id. Please provide both parameters in the URL.</p>
-    #         </body>
-    #     </html>
-    #     '''
-    #     return error_html_content
-
-    # # HTML content to display while working
-    # working_html_content = '''
-    # <html>
-    #     <head>
-    #         <title>Processing...</title>
-    #         <meta http-equiv="refresh" content="5;url=/submit?event_id={{ event_id }}&ticket_id={{ ticket_id }}" />
-    #     </head>
-    #     <body>
-    #         <h1>Working...</h1>
-    #         <p>Please wait while we process your request.</p>
-    #     </body>
-    # </html>
-    # '''
 
     if not event_id or not ticket_id:
         # Render the error.html template if parameters are missing
@@ -201,3 +171,5 @@ if __name__ == '__main__':
 # https://drab-gold-chimpanzee-shoe.cyclic.app//tickets/123/events/test
 # https://drab-gold-chimpanzee-shoe.cyclic.app/submit?event_id=test_123&ticket_id=4
 # https://secure.backblaze.com/b2_buckets.htm
+    
+https://drab-gold-chimpanzee-shoe.cyclic.app/validate_ticket?event_id=test_123&ticket_id=15
