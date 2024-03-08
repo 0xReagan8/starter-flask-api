@@ -172,4 +172,4 @@ if __name__ == '__main__':
 # https://drab-gold-chimpanzee-shoe.cyclic.app/submit?event_id=test_123&ticket_id=4
 # https://secure.backblaze.com/b2_buckets.htm
     
-https://drab-gold-chimpanzee-shoe.cyclic.app/validate_ticket?event_id=test_123&ticket_id=15
+# https://drab-gold-chimpanzee-shoe.cyclic.app/validate_ticket?event_id=test_123&ticket_id=15
