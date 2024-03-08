@@ -99,11 +99,12 @@ def submit_request():
 
     # read in the pickel file
     data = read_pickle(event_id)
-    percent_complete = (len((data) / 30)*100)
-
+    percent_complete = (len(data) / 30) *100
+    
     if data:
         # write - update data
         data[ticket_id] = {"event_id":event_id, "scan_time":scan_time}
+        
     else:
         data = {ticket_id: {"event_id":event_id, "scan_time":scan_time}}
 
