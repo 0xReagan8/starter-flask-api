@@ -109,10 +109,6 @@ def list_bucket():
 
     return(file_names)
 
-@app.route('/foo')
-def foo_page():
-    # note that we set the 404 status explicitly
-    return render_template('error.html', error_message='Page not found',error_code=404), 404
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -121,7 +117,7 @@ def page_not_found(e):
 
 @app.errorhandler(500)
 def internal_server_error(e):
-    return render_template('error.html', error_message='Internal server error'), 500
+    return render_template('error.html', error_message='Internal server error',error_code=500), 500
 
 
 @app.route('/')
