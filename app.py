@@ -117,7 +117,7 @@ def foo_page():
 @app.errorhandler(404)
 def page_not_found(e):
     # note that we set the 404 status explicitly
-    return render_template('error.html', error_message='Page not found'), 404
+    return render_template('error.html', error_message='Page not found', error_code=404), 404
 
 @app.errorhandler(500)
 def internal_server_error(e):
