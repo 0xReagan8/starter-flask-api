@@ -4,12 +4,6 @@ import requests
 # import json
 from flask import Flask, Response, request, render_template, render_template_string
 
-KEY_NAME = os.getenv("KEY_NAME")
-
-# Your Discord webhook URL
-WEBHOOK_URL = "https://discord.com/api/webhooks/1214662183452016660/1yOSpSVg3oj0gr6rQWnpKW9ncjt-TKeODdlzXE12hWSLwmNlUNOEUI21L3hmxPYCvK5u"
-SERVVER_URL = 'https://drab-gold-chimpanzee-shoe.cyclic.app'
-APPROVED_SVG = 'approved.svg'
 
 app = Flask(__name__)
 
@@ -119,7 +113,6 @@ def page_not_found(e):
 def internal_server_error(e):
     return render_template('error.html', error_message='Internal server error',error_code=500), 500
 
-
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -161,7 +154,7 @@ def submit_request():
 
     embed = {
         "title": "🚀",
-        "description": f"Event ID: {event_id}\nTicket ID: {ticket_id}\nScan Time: {scan_time}\n\n{SERVVER_URL}",
+        "description": f"Event ID: {event_id}\nTicket ID: {ticket_id}\nScan Time: {scan_time}\n\n{os.getenv("SERVER_URL")}",
         "color": 1543684, 
         "fields": [],
         "footer": {
@@ -175,7 +168,7 @@ def submit_request():
     }
 
     # Convert the payload to JSON and make the POST request to the webhook URL
-    response = requests.post(WEBHOOK_URL, json=payload)
+    response = requests.post(os.getenv("WEBHOOK_URL"), json=payload)
 
     # Check the response
     if response.status_code == 204:
@@ -186,14 +179,12 @@ def submit_request():
 
     return render_template('verified.html', event_id=event_id, ticket_id=ticket_id, scan_time=scan_time, percent_complete=percent_complete)
 
-
 @app.route('/list_events', methods=['GET'])
 def list_events_page():    
     # read in the pickel file
     data = list_bucket()
     
     return render_template('list_events.html', data=data)
-
 
 @app.route('/list_event', methods=['GET'])
 def list_event_page():
