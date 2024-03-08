@@ -154,7 +154,7 @@ def submit_request():
 
     embed = {
         "title": "🚀",
-        "description": f"Event ID: {event_id}\nTicket ID: {ticket_id}\nScan Time: {scan_time}\n\n{os.getenv("SERVER_URL")}",
+        "description": f"Event ID: {event_id}\nTicket ID: {ticket_id}\nScan Time: {scan_time}\n\n{os.getenv('SERVER_URL')}",
         "color": 1543684, 
         "fields": [],
         "footer": {
@@ -210,4 +210,5 @@ if __name__ == '__main__':
 # https://drab-gold-chimpanzee-shoe.cyclic.app/list_events
 # https://drab-gold-chimpanzee-shoe.cyclic.app/list_event?event_id=test
     
+https://drab-gold-chimpanzee-shoe.cyclic.app/validate_ticket?event_id=test_123&ticket_id=23
 
