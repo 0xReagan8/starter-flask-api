@@ -110,7 +110,7 @@ def list_bucket():
     return(file_names)
 
 @app.route('/foo')
-def foo_page(e):
+def foo_page():
     # note that we set the 404 status explicitly
     return render_template('error.html', error_message='Page not found'), 404
 
