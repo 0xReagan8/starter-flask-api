@@ -13,19 +13,19 @@ APPROVED_SVG = 'approved.svg'
 
 app = Flask(__name__)
 
-# def format_timestamp(timestamp):
-#     from datetime import datetime
+def format_timestamp(timestamp):
+    from datetime import datetime
 
-#     # Convert milliseconds to seconds
-#     timestamp_in_seconds = timestamp / 1000
+    # Convert milliseconds to seconds
+    timestamp_in_seconds = timestamp / 1000
 
-#     # Convert to a datetime object
-#     dt_object = datetime.fromtimestamp(timestamp_in_seconds)
+    # Convert to a datetime object
+    dt_object = datetime.fromtimestamp(timestamp_in_seconds)
 
-#     # Format the datetime object to a string in AM/PM format
-#     formatted_time = dt_object.strftime('%Y-%m-%d %I:%M:%S %p')
+    # Format the datetime object to a string in AM/PM format
+    formatted_time = dt_object.strftime('%Y-%m-%d %I:%M:%S %p')
 
-#     return(formatted_time)
+    return(formatted_time)
 
 def write_pickle(data:dict, event_id:str):
     import pickle
@@ -84,30 +84,30 @@ def read_pickle(event_id):
     except:
         return(None)
 
-# def list_bucket():
-#     from b2sdk.v1 import InMemoryAccountInfo, B2Api
-#     import os
+def list_bucket():
+    from b2sdk.v1 import InMemoryAccountInfo, B2Api
+    import os
 
-#     # Replace these with your actual application key ID and application key
-#     application_key_id = os.getenv("KEY_ID")
-#     application_key = os.getenv("APPLICATION_KEY")
+    # Replace these with your actual application key ID and application key
+    application_key_id = os.getenv("KEY_ID")
+    application_key = os.getenv("APPLICATION_KEY")
 
-#     # Set up the B2 API
-#     info = InMemoryAccountInfo()
-#     b2_api = B2Api(info)
-#     b2_api.authorize_account("production", application_key_id, application_key)
+    # Set up the B2 API
+    info = InMemoryAccountInfo()
+    b2_api = B2Api(info)
+    b2_api.authorize_account("production", application_key_id, application_key)
 
-#     # Get the bucket name from environment variable
-#     bucket_name = b2_api.get_bucket_by_name(os.getenv("BUCKET_NAME"))
+    # Get the bucket name from environment variable
+    bucket_name = b2_api.get_bucket_by_name(os.getenv("BUCKET_NAME"))
 
-#     # List all files in the bucket and print them
-#     for file_info, folder_name in bucket_name.ls(show_versions=False):
-#         print(f'File name: {file_info.file_name}, File ID: {file_info.id_}')
+    # List all files in the bucket and print them
+    for file_info, folder_name in bucket_name.ls(show_versions=False):
+        print(f'File name: {file_info.file_name}, File ID: {file_info.id_}')
 
-#     # create a list of tuples with the file name and file id 
-#     file_names = [ (fi.file_name, fi.id_, format_timestamp(fi.upload_timestamp))for fi, fn in bucket_name.ls(show_versions=False)]
+    # create a list of tuples with the file name and file id 
+    file_names = [ (fi.file_name, fi.id_, format_timestamp(fi.upload_timestamp))for fi, fn in bucket_name.ls(show_versions=False)]
 
-#     return(file_names)
+    return(file_names)
 
 @app.route('/')
 def home():
@@ -176,13 +176,13 @@ def submit_request():
     return render_template('verified.html', event_id=event_id, ticket_id=ticket_id, scan_time=scan_time, percent_complete=percent_complete)
 
 
-# @app.route('/list_events', methods=['GET'])
-# def list_events_page():
+@app.route('/list_events', methods=['GET'])
+def list_events_page():
     
-#     # read in the pickel file
-#     data = list_bucket()
+    # read in the pickel file
+    data = list_bucket()
     
-#     return render_template('list_events.html', data=data)
+    return render_template('list_events.html', data=data)
 
             
 if __name__ == '__main__':
