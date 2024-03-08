@@ -153,7 +153,7 @@ def submit_request():
         "description": f"Event ID: {event_id}\nTicket ID: {ticket_id}\nScan Time: {scan_time}\n\n{SERVVER_URL}",
         "color": 1543684, 
         "fields": [],
-        "footer": {ss
+        "footer": {
             "text": "** use report URL to get a text listing of all activity"
         }
     }
