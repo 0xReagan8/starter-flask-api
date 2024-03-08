@@ -81,7 +81,7 @@ if __name__ =="__main__":
 
     # write_pickle_test(test, 'test_123')
     data = read_pickle_test('test_123')
-    print(data)
+    print(len((data) / 30)*100)
 
 # def read_test():
 #     from b2sdk.v1 import InMemoryAccountInfo, B2Api, DownloadDestBytes
