@@ -177,14 +177,25 @@ def submit_request():
 
 
 @app.route('/list_events', methods=['GET'])
-def list_events_page():
-    
+def list_events_page():    
     # read in the pickel file
     data = list_bucket()
     
     return render_template('list_events.html', data=data)
 
-            
+
+@app.route('/list_event', methods=['GET'])
+def list_events_page():
+    event_id = request.args.get('event_id')
+
+    # read in the pickel file
+    data = read_pickle(event_id)
+    percent_complete = (len(data) / 30) *100
+    
+    return render_template('list_events.html', data=data, percent_complete=percent_complete)
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
