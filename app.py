@@ -192,7 +192,7 @@ def list_events_page():
     data = read_pickle(event_id)
     percent_complete = (len(data) / 30) *100
     
-    return render_template('list_events.html', data=data, percent_complete=percent_complete)
+    return render_template('list_event.html', data=data, percent_complete=percent_complete)
 
 
 
@@ -206,5 +206,6 @@ if __name__ == '__main__':
 # https://drab-gold-chimpanzee-shoe.cyclic.app/validate_ticket?event_id=test_123&ticket_id=21
     
 # https://drab-gold-chimpanzee-shoe.cyclic.app/list_events
+# https://drab-gold-chimpanzee-shoe.cyclic.app/list_event?event_id=test
     
 
