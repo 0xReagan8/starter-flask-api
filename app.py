@@ -99,6 +99,7 @@ def submit_request():
 
     # read in the pickel file
     data = read_pickle(event_id)
+    percent_complete = (len((data) / 30)*100)
 
     if data:
         # write - update data
@@ -132,15 +133,9 @@ def submit_request():
     else:
         print(f"Failed to send embed. Status code: {response.status_code} - Response: {response.text}")
 
-   # You might want to select an SVG file dynamically based on ticket_id and event_id
-    svg_file_path = APPROVED_SVG
-    
-    # Open the SVG file and read its contents
-    with open(svg_file_path, 'r') as svg_file:
-        svg_data = svg_file.read()
 
-    # Return the SVG data with the appropriate MIME type
-    return Response(svg_data, mimetype='image/svg+xml')
+    return render_template('verified.html', event_id=event_id, ticket_id=ticket_id, percent_complete=percent_complete)
+
     
             
 if __name__ == '__main__':
@@ -150,4 +145,4 @@ if __name__ == '__main__':
 # https://drab-gold-chimpanzee-shoe.cyclic.app/submit?event_id=test_123&ticket_id=4
 # https://secure.backblaze.com/b2_buckets.htm
     
-# https://drab-gold-chimpanzee-shoe.cyclic.app/validate_ticket?event_id=test_123&ticket_id=15
+# https://drab-gold-chimpanzee-shoe.cyclic.app/validate_ticket?event_id=test_123&ticket_id=16
