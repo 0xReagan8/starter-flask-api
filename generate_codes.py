@@ -5,7 +5,7 @@ EVENT_ID="test_123"
 # format the event id so we can send in the URL
 EVENT_ID= EVENT_ID.replace(' ', '_' )
 SERVER_URL = "https://drab-gold-chimpanzee-shoe.cyclic.app"
-ENDPOINT = "submit"
+ENDPOINT = "validate_ticket"
 BASE_URL = f"{SERVER_URL}/{ENDPOINT}"  # Replace with your actual server address
 # https://drab-gold-chimpanzee-shoe.cyclic.app/submit?event_id=test_123&ticket_id=5
 

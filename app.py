@@ -115,7 +115,7 @@ def submit_request():
         "description": f"Event ID: {event_id}\nTicket ID: {ticket_id}\nScan Time: {scan_time}\n\n{SERVVER_URL}",
         "color": 1543684, 
         "fields": [],
-        "footer": {
+        "footer": {ss
             "text": "** use report URL to get a text listing of all activity"
         }
     }
@@ -146,4 +146,4 @@ if __name__ == '__main__':
 # https://drab-gold-chimpanzee-shoe.cyclic.app/submit?event_id=test_123&ticket_id=4
 # https://secure.backblaze.com/b2_buckets.htm
     
-# https://drab-gold-chimpanzee-shoe.cyclic.app/validate_ticket?event_id=test_123&ticket_id=16
+# https://drab-gold-chimpanzee-shoe.cyclic.app/validate_ticket?event_id=test_123&ticket_id=21
